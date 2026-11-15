@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepDTA | Binding Affinity Prediction</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="logo">
+            <div class="logo-icon">🧬</div>
+            <div>
+                <div class="logo-title">DeepDTA</div>
+                <div class="logo-subtitle">Drug–Target Affinity Prediction</div>
+            </div>
+        </div>
+        <div class="nav-badge"><span class="status-dot"></span>AI MODEL ONLINE</div>
+    </header>
+
+    <main class="container">
+
+        <section class="hero">
+            <div class="hero-badge">Deep Learning for Drug Discovery</div>
+            <h1>Predict Drug–Target <span>Binding Affinity</span></h1>
+            <p>
+                Enter a drug's SMILES representation and a protein sequence
+                to estimate their binding affinity using the DeepDTA
+                convolutional neural network.
+            </p>
+        </section>
+
+        <section class="prediction-card">
+
+            <div class="card-header">
+                <div>
+                    <div class="section-label">PREDICTION</div>
+                    <h2>Drug–Target Analysis</h2>
+                </div>
+                <div class="model-pill">CNN</div>
+            </div>
+
+            <div class="input-grid">
+                <div class="input-section">
+                    <div class="input-title">
+                        <div class="input-icon drug-icon">💊</div>
+                        <div>
+                            <h3>Drug SMILES</h3>
+                            <p>Chemical structure representation</p>
+                        </div>
+                    </div>
+                    <textarea id="smiles" placeholder="Example: CC(=O)OC1=CC=CC=C1C(=O)O" spellcheck="false"></textarea>
+                    <div class="input-hint">Use the Davis dataset style: capital letters only, rings written like C1=CC=CC=C1 (not c1ccccc1), no square brackets</div>
+                </div>
+
+                <div class="input-section">
+                    <div class="input-title">
+                        <div class="input-icon protein-icon">🧬</div>
+                        <div>
+                            <h3>Protein Sequence</h3>
+                            <p>Amino acid sequence</p>
+                        </div>
+                    </div>
+                    <textarea id="protein" placeholder="Example: MKTIIALSYIFCLVFADYKDDDDK" spellcheck="false"></textarea>
+                    <div class="input-hint">Enter the protein amino acid sequence</div>
+                </div>
+            </div>
+
+            <button id="predictButton" class="predict-button" onclick="predictAffinity()">
+                <span id="buttonText">Predict Binding Affinity</span>
+                <span class="button-arrow">→</span>
+            </button>
+
+            <div class="result-card">
+                <div class="result-left">
+                    <div class="result-icon">⚡</div>
+                    <div>
+                        <div class="result-label">PREDICTED BINDING AFFINITY</div>
+                        <div class="result-description">DeepDTA model prediction</div>
+                    </div>
+                </div>
+                <div class="result-value">
+                    <span id="resultValue">—</span>
+                    <small>pKd</small>
+                </div>
+            </div>
+
+            <div class="scale-section" id="scaleSection" hidden>
+                <div class="category-label" id="categoryLabel"></div>
+                <div class="scale-bar">
+                    <div class="seg weak"></div>
+                    <div class="seg moderate"></div>
+                    <div class="seg strong"></div>
+                    <div class="marker" id="marker"></div>
+                </div>
+                <div class="scale-labels">
+                    <span>Weak (5 to under 6)</span>
+                    <span>Moderate (6 to under 7)</span>
+                    <span>Strong (7 and above)</span>
+                </div>
+            </div>
+
+            <div id="warnings"></div>
+
+        </section>
+
+        <section class="info-grid">
+            <div class="info-card">
+                <div class="info-card-icon">🧪</div>
+                <h3>Drug Representation</h3>
+                <p>The drug is represented using its SMILES molecular notation and processed as a sequence.</p>
+            </div>
+            <div class="info-card">
+                <div class="info-card-icon">🧬</div>
+                <h3>Protein Representation</h3>
+                <p>Protein amino acid sequences are encoded into numerical representations for the neural network.</p>
+            </div>
+            <div class="info-card">
+                <div class="info-card-icon">🤖</div>
+                <h3>Deep Learning</h3>
+                <p>Two convolutional neural network branches learn features from drug and protein sequences.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div>
+            <strong>DeepDTA</strong>
+            <span>Drug–Target Binding Affinity Prediction</span>
+        </div>
+        <div class="footer-right">Powered by Deep Learning</div>
+    </footer>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
